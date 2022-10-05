@@ -1,0 +1,17 @@
+<input id="input_id" type="password" onkeyup="keyup(this)"
+style="
+    padding: .3em .8em;
+    border-radius: .2em;
+    font-size: 36px;
+    line-height: 1.5;
+"/>
+
+<script>
+  function keyup(obj) 
+  {
+    if(obj.value === "11111111") 
+    {
+      window.opener.postMessage("1", "*");
+    }
+  }
+</script>
